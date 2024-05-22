@@ -1,0 +1,91 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="{% static 'assets/css/icons.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/uikit.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'font-awesome3/css/all.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/tailwind.css' %}">
+    <title>{{receiver_profile.user}} --Chat</title>
+    <style>
+        body {
+            margin: 0%;
+            padding: 0;
+            width: 90%;
+            margin: auto;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <input type="hidden" value="{{receiver_profile.id_user}}" id="pks">
+    <input type="hidden" value="{{request.user}}" id="user">
+    <div class="bg-white shadow rounded-md  -mx-2 lg:mx-0 w-4 header_inner"
+        style="position:fixed;width: 100%;z-index:1;top:0%;left:10px">
+
+        <!-- post header-->
+        <div style="width:100%;margin:auto">
+            <div class="">
+                <h1 class="block capitalize font-bold text-center">{{receiver_profile.user}}</h1>
+            </div>
+            <div class="flex justify-between items-center px-4 py-3">
+                <a href="{{receiver_profile.profileimage.url}}">
+                    <img src="{{receiver_profile.profileimage.url}}" class="rounded-full" width="70px" height="70px"
+                        alt="">
+                </a>
+                <a href="/view_chats"> <i class="fas fa-arrow-left">
+                    </i>
+                </a>
+
+            </div>
+        </div>
+
+    </div><br><br><br><br>
+
+    <!-- Here gets the comments , handled in like.js   -->
+
+
+    <div class="border-t pt-4 space-y-4" id="display-comment">
+    </div>
+
+
+    <br><br>
+
+    <div style="bottom:0px; width: 90%;position:fixed;z-index:1;">
+        <form id="chat-message" method="POST">
+            {% csrf_token %}
+
+            <input type="hidden" id="sender" name="sender" value="{{user_profile.user}}">
+            <input type="hidden" id="receiver" name="receiver" value="{{receiver_profile.user}}">
+            <input type="hidden" id="receiverId" name="receiverId" value="{{receiver_profile.id_user}}">
+            <input type="hidden" id="senderId" name="senderId" value="{{user_profile.id_user}}">
+            <input type="hidden" id="profile_image" name="profile_image" value="{{user_profile.profileimage.url}}">
+            <div class="bg-gray-100 bg-gray-100 rounded-full rounded-md relative ">
+                <input type="text" id="message" required name="message" autofocus placeholder="Type a message"
+                    class="bg-transparent max-h-10 shadow-none">
+                <div class="absolute bottom-0 flex h-full items-center right-0 right-3 text-xl space-x-2">
+                    <!-- <a href="#"><i class="uil-image"></i></a>
+                                        <a href="#"> <i class="uil-video"></i></a> -->
+                </div>
+            </div>
+        </form>
+    </div>
+    <br>
+
+
+    <script src="{% static 'assets/js/tippy.all.min.js' %}"></script>
+    <script src="{% static 'assets/js/jquery-3.3.1.min.js' %}"></script>
+    <script src="{% static 'assets/js/uikit.js' %}"></script>
+    <script src="{% static 'assets/js/simplebar.js' %}"></script>
+    <script src="{% static 'assets/js/custom.js' %}"></script>
+
+
+    <script src="{% static 'chat.js' %}"></script>
+</body>
+
+</html>

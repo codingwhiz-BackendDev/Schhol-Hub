@@ -1,0 +1,28 @@
+{% load static %}
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'boot 5/css/bootstrap.css' %}">
+    <title>Announcement</title>
+</head>
+
+<body style="background-color: #ccc;">
+
+    {% for announcement in announcement %}
+    <div class="card-body">
+        <div class="card-header" style="background-color: #cccc;">{{announcement.title}}</div>
+        <br>
+        <div class="card-header" style="background-color: #cccc;">{{announcement.body}}</div>
+        <br>
+        <div class="card-image">
+            <img src="{{announcement.image.url}}" width="100%" alt="">
+        </div>
+    </div>
+    <hr>
+    {% endfor %}
+
+</body>
+
+</html>
