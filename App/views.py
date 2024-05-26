@@ -472,13 +472,10 @@ def view_chats(request):
     for user_id in users:
         user_id =  user_id.id_user
         
-        messages = Message.objects.filter(Q(senderId = user_id)|Q(receiverId = user_id)).last()
-        #messages  = (str(user_id) + '' + str(messages))
-        message = []
-        message.append(messages) 
-        message = message.pop()  
-        print(type(message))
-    return render(request, 'view_chats.html', {'users': users,'messages':messages})
+        messages = Message.objects.filter(Q(senderId = user_id)|Q(receiverId = user_id))
+        messages = HttpResponse(messages)
+        print(messages)
+    return render(request, 'view_chats.html', {'users': users, 'messages':messages})
 
 @login_required(login_url='login') 
 def search_chats(request):

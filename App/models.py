@@ -90,3 +90,7 @@ class Message(models.Model):
     message = models.CharField(max_length=50000000, null=True)
     def __str__(self):
         return str(self.message)
+
+class LastMessage(models.Model):
+    receiverId = models.CharField(max_length=50000000, null=True)
+    senderId = models.CharField(max_length=50000000, null=True)
